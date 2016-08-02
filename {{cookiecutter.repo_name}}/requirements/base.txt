@@ -1,4 +1,5 @@
 django
+dj-database-url
 ipython
 python-dotenv
 pytz
