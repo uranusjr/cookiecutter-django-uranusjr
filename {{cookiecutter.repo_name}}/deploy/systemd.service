@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve {{ cookiecutter.project_name }}
+After=network.target
+
+[Service]
+User=modify_to_production_user
+Group=www
+WorkingDirectory=/path/to/project/root
+Environment="PATH=/path/to/project/venv/bin"
+ExecStart=/path/to/project/venv/bin/uwsgi --ini deploy/uwsgi.ini
+
+[Install]
+WantedBy=multi-user.target
