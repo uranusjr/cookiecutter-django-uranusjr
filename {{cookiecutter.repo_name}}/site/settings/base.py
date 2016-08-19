@@ -151,3 +151,29 @@ EMAIL_HOST_PASSWORD = os.environ['DJANGO_EMAIL_HOST_PASSWORD']
 EMAIL_PORT = 587
 
 EMAIL_USE_TLS = True
+
+
+# Logging.
+# This logs everything to stderr by default.
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'default': {    # Match access log style.
+            'format': '[%(asctime)s] "%(levelname)s %(name)s" %(message)s',
+            'datefmt': r'%d/%b/%Y %H:%M:%S',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 0,
+            'class': 'logging.StreamHandler',
+            'formatter': 'default',
+        },
+    },
+    'root': {
+        'level': 0,
+        'handlers': ['console'],
+    }
+}
