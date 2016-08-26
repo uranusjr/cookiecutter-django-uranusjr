@@ -1,0 +1,8 @@
+-r base.txt
+flake8
+htmldom
+pytest
+pytest-cov
+pytest-django
+pytest-mock
+pytest-pythonpath
