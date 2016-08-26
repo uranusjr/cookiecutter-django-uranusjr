@@ -11,8 +11,9 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'default': {
+        'default': {    # Match access log style.
             'format': '%(asctime)s %(levelname).1s [%(name)s] %(message)s',
+            'datefmt': r'%d/%b/%Y %H:%M:%S',
         },
     },
     'handlers': {
@@ -25,7 +26,7 @@ LOGGING = {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
             # TODO: Give me a better configuration.
-            # 'filename': '{{ cookiecutter.repo_name }}.log',
+            'filename': '{{ cookiecutter.repo_name }}.log',
             'maxBytes': 1024 * 1024,    # 1 MB.
             'backupCount': 10,
             'formatter': 'default',

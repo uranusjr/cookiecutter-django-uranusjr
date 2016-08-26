@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+
+<meta charset="utf-8" />
+<title>{% block head_title %}{{ settings.SITE_TITLE }}{% endblock head_title %}</title>
+
+{% block styles %}
+{% endblock styles %}
+
+</head>
+
+
+<body>
+
+{% block body %}
+{% endblock body %}
+
+{% block scripts %}
+{% endblock scripts %}
+
+</body>
+
+</html>
