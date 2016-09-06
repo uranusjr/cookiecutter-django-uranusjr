@@ -11,14 +11,18 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import pathlib
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import dj_database_url
+import dotenv
+
+
+# Base path to the "site" directory in project.
+BASE_PATH = pathlib.Path(__file__).parent.parent.resolve()
 
 # Dotenv loading. The .env file should by default locates in the root
 # directory, i.e. the oe containing "site".
-from dotenv import load_dotenv
-load_dotenv(os.path.join(os.path.dirname(BASE_DIR), '.env'))
+dotenv.load_dotenv(BASE_PATH.parent.joinpath('.env').as_posix())
 
 
 # Development settings.
@@ -59,7 +63,7 @@ ROOT_URLCONF = 'urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_PATH.joinpath('templates').as_posix()],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,8 +83,6 @@ WSGI_APPLICATION = 'wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 # https://github.com/kennethreitz/dj-database-url
-
-import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.parse(os.environ['DJANGO_DATABASE_URL'])
@@ -121,14 +123,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
+LOCALE_PATHS = [BASE_PATH.joinpath('locale').as_posix()]
 
 
 # Media (e.g. user-uploaded) files.
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, '..', '..', 'media'))
+MEDIA_ROOT = BASE_PATH.parent.parent.joinpath('media').as_posix()
 
 
 # Static files (CSS, JavaScript, Images)
@@ -136,7 +138,9 @@ MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, '..', '..', 'media'))
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, '..', '..', 'static'))
+STATIC_ROOT = BASE_PATH.parent.parent.joinpath('static').as_posix()
+
+STATICFILES_DIRS = [BASE_PATH.joinpath('static').as_posix()]
 
 
 # Emails.
@@ -185,3 +189,9 @@ LOGGING = {
 # Custom settings.
 
 SITE_NAME = '{{ cookiecutter.project_name }}'
+
+
+del os
+del pathlib
+del dj_database_url
+del dotenv
