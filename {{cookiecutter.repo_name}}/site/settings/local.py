@@ -8,6 +8,8 @@ INSTALLED_APPS += [     # noqa
     'djgunicorn',
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+MIDDLEWARE += [     # noqa
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
 
-DEBUG_TOOLBAR_PATCH_SETTINGS = False
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
