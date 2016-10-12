@@ -1,8 +1,4 @@
 -r testing.txt
 
-# Switch back when 1.6 releases.
-# https://github.com/jazzband/django-debug-toolbar/issues/853
-# django-debug-toolbar
-git+https://github.com/jazzband/django-debug-toolbar.git
-
+django-debug-toolbar>=1.6
 djgunicorn
