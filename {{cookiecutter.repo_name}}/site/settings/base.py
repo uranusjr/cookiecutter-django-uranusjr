@@ -22,7 +22,10 @@ BASE_PATH = pathlib.Path(__file__).parent.parent.resolve()
 
 # Dotenv loading. The .env file should by default locates in the root
 # directory, i.e. the oe containing "site".
-dotenv.load_dotenv(BASE_PATH.parent.joinpath('.env').as_posix())
+dotenv_path = BASE_PATH.parent.joinpath('.env')
+if dotenv_path.exists():
+    dotenv.load_dotenv(dotenv_path.as_posix())
+del dotenv_path
 
 
 # Development settings.
